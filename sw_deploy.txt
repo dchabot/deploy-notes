@@ -1,0 +1,39 @@
+This note discusses the processes by which software is deployed to and versioned
+for the Controls network (FTC).
+
+NOTE: define scope of software to be included here (all? iocs, dependencies,
+support applications)
+
+The act of software deployment is executed by the Control System engineer
+responsible for the sub-system(s) affected by the software change. In many
+cases, this engineer will also be the Author of the change(s).
+
+In the absence of beam production (maintenance, shutdown, or development
+periods), the controls engineer is not required to obtain Stakeholder 
+permission to deploy software updates.
+
+To affect a software change, the control system engineer will first obtain
+approval from the Stakeholders: sub-system engineer(s), system manager, and
+perhaps Operations. This communication should take the form of email, 
+distributed by the control system engineer to the Stakeholders, with permission
+distributed in kind.
+
+Puppet will be used to deploy all software changes to FTC through manual
+invocation only. Automated (periodic?) puppet updates will not be permitted.
+
+Typically, the HEAD commit of the "release/fcN" branch is the version
+deployed to the FTC network. The version of software deployed is 
+preserved in a message digest (eg: the SHA1 hash of git commit). This is the
+case for all IOC software. IOC dependencies typically take the form of a Debian
+package, which contains the version message digest embedded in the package
+version string.
+
+Most IOC software does not have a means of interrogating its own version
+information using Channel Access protocols at run-time (exception: EVG?).
+Instead, the git command line tool or Debian packaging tools may be used to
+discover deployed software versions. If run-time software version queries
+become a requirement, it is fairly simple to implement.
+
+Eg: in an IOC's startup script, add
+  	iocsh> system 'SHA1=`git rev-parse --short HEAD`; caput ${IOC}:sha1 ${SHA1}',
+	assuming that a suitable record exists in the IOC's database.
