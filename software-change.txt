@@ -1,0 +1,78 @@
+Identification of risk in Control System software
+
+A control system is concerned with manipulations of the physical world,
+often involving computerized decisions.
+This gives rise to failure modes not found in other computerized systems (eg. data storage and processing)
+Sources of physical failure modes have to do with (lack of) control over stored energy systems.
+
+* particle beam
+* RF power systems
+* electro-magnet power systems
+* cryogenic pressure vessels
+* cooling systems
+* motorized/actuated mechanical systems
+
+Assessing the risk of any change to a control system, software or otherwise, begins with identifying what a component is capable of, in isolation, and within the larger system.  Before and after a change.  This includes enumerating known/intended capabilities, and attempting to identify and unintended capabilities.
+
+Consideration much also be given to the impact on operations.  This includes delays and lost time involved in making a change.  For example, by delaying or interfering with other work.  Also, the potential result of mistakes.
+
+A change which does not involved, directly or indirectly, stored energy, and which has no potential operational impact, has no risk.  However, such changes are rare as such hypothetical systems would not be very useful.
+
+
+An assessment should begin by identifying
+
+* Stored energy systems involved
+** Possible effects of device/program on stored energy systems
+** Mitigations in place
+
+* Impact of operations
+** How often is this device/program in use
+** How much advance notice of use
+** Consequences if not available
+** Consequences if not functioning properly
+** How quickly malfunction can be identified
+
+* Indirect effects
+** Coupling with other components
+** Participation in closed loop control (continuous or on demand)
+
+
+
+
+
+
+
+
+
+
+control software life-cycle
+
+* Initial design, prototype coding (uses "safe" HW, or simulator if available)
+* (Re)Commissioning (uses real/live HW and/or beam)
+* Operations
+
+
+(Re)Commissioning
+
+* Expect that software will not work correctly.
+** troubleshooting is the "norm"
+* Formal processes begins w/ commissioning
+* Begin collecting list of stake holders (TODO where?)
+* Plan/schedule testing work
+** Coordinate use of shared test systems
+* Build test plan
+** List features and how they will be tested (can be manual)
+** Include "plug" test (loss of power, disconnected cables)
+* Sign off by all stakeholders when Commissioning complete
+
+Operations
+
+* Expect that software is working correctly
+* Capture versions
+* Track issues w/ ticket
+* troubleshooting process
+* Change control for bug fixes
+* May trigger re-commissioning (stakeholder sign off required)
+** critical bug, significant rewrite, new hardware, or new requirements
+
+
